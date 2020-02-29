@@ -1,14 +1,18 @@
-import src.opcv as test
+from src import opcv
 import sys
 import os
 
-def main(page_size: int,num_pages:int=0,output:str=''): 
-	print(test.get_data(apikey))
+def main(page_size:int, num_pages:int=1, output:str=''): 
+	results = opcv.get_data(apitoken, int(page_size), int(num_pages))
+	if len(output) > 1:
+		results.reset_index(inplace=True)
+		results.to_json('//app//out//'+output)
+	else:
+		print(results)
 	
 
 if __name__ == "__main__":
 	args   = sys.argv[1:]
-	apikey = os.environ['APIKEY']
+	apitoken = os.environ['APIKEY']
 	main(*args)
-	
 	
