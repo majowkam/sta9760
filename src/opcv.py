@@ -6,6 +6,6 @@ def get_data(apitoken:str, page_size:int, num_pages:int):
 	results = pd.DataFrame()
 	for i in range(num_pages):
 		results = pd.concat([pd.DataFrame(
-			client.get("nc67-uf89", limit=page_size)),results])
+			client.get("nc67-uf89", limit=page_size, offset=(i-1)*page_size)),results])
 	return results
 
